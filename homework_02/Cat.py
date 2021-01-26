@@ -23,7 +23,7 @@ Mimi can run
 Mimi can meow
 """
 
-from Two_homework.Animal import Animal
+from homework_02.Animal import Animal
 
 
 class Cat(Animal):
