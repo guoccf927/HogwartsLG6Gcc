@@ -55,13 +55,3 @@ class TestWeChat:
 
     def teardown(self):
         self.driver.quit()
-
-
-
-
-
-
-
-
-
-
