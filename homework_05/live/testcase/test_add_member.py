@@ -12,9 +12,11 @@ class TestMember:
     def setup(self):
         """
         准备工作：
-        1、打开企业微信首页
-        2、扫码登录
-        3、停留在首页页签下
+        1、关闭 chrome 浏览器
+        2、复用浏览器，Windows 命令行下执行命令：chrome --remote-debugging-port=9222
+        3、在步骤2、打开的浏览器中，打开企业微信首页
+        4、扫码登录
+        5、停留在首页页签下
         代码解析：
         1、实例化一个对象
         2、MainPage() 继承 BasePage
@@ -40,14 +42,32 @@ class TestMember:
         account = f"account_{now_time}"
         phone = f"132{number}"
 
-        # 进入 通讯录 获取列表信息
-        info_list = self.main_page.goto_add_member().add_member(username, account, phone).get_user_info()
+        # 断言方法一
+        """
+        思路：
+        1、添加用户
+        2、进入 通讯录 获取全部列表信息
+        3、用户名 存在
+        4、手机号 正确
+        缺点：如果添加的联系人在第一页，会翻到最后一页，获取完所有的姓名再返回；如果有几十页，效率就会很低
+        """
+        # info_list = self.main_page.goto_add_member().add_member(username, account, phone).get_user_info()
+        # assert username in info_list
+        # assert phone in info_list
 
-        # 用户名 正确
-        assert username in info_list
-
-        # 手机号 正确
-        assert phone in info_list
+        # 断言方法二、
+        """
+        思路：
+        1、添加用户
+        2、进入 通讯录，获取每页信息
+        3、只要 用户名 存在，则返回True
+        4、只要 手机号 正确，则返回True
+        """
+        add_mem = self.main_page.goto_add_member().add_member(username, account, phone)
+        check_username = add_mem.check_username(username)
+        assert check_username
+        check_user_phone = add_mem.check_user_phone(username)
+        assert check_user_phone
 
     def teardown(self):
         """
