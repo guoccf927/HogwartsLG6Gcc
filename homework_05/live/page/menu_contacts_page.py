@@ -107,7 +107,7 @@ class MenuContactsPage(BasePage):
         """
         1、设置默认参数 False
         2、获取首页信息，判断手机号存在，则更新参数为 True
-        3、首页不存在该用户名，(1) js_next_page 翻页元素不存在时，保持默认参数 False
+        3、首页不存在该手机号，(1) js_next_page 翻页元素不存在时，保持默认参数 False
                            (2) js_next_page 翻页元素存在，点击翻页按钮并取出当页内容，判断手机号，存在则更新参数为 True 且跳出循环
         可以传入一个参数，在while里做判断 ，判断这个人存在 ，就return True，
         另一个判断条件是，如果翻页完成，就 return False.
