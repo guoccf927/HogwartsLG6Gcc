@@ -103,6 +103,44 @@ class MenuContactsPage(BasePage):
             print("except:", e)
         return exist_flag
 
+    def check_user_info_last(self, info):
+        """
+        第六阶段12节 数据驱动 所感
+        :return: 默认参数 False ，找到 info 即更新参数为 True
+        """
+        # 设置默认参数
+        exist_flag = False
+
+        # 获取用户信息
+        info_list = []
+
+        # 取首页内容
+        ele_list = self.finds(By.CSS_SELECTOR, ".member_colRight_memberTable_td")
+        for ele in ele_list:
+            info_list.append(ele.get_attribute("title"))
+
+        # 存在，则更新参数为 True
+        if info in info_list:
+            exist_flag = True
+            return exist_flag
+
+        try:
+            """
+            1、取出当前页数
+            2、当前面数字和后面数字相同时，则结束
+            """
+            page_str = self.find(By.CSS_SELECTOR, ".ww_pageNav_info_text").text
+            print(f"当前页数：{page_str}")
+            page_list = page_str.split("/")
+            if page_list[0] == page_list[-1]:
+                return exist_flag
+
+            # 点击 下一页
+            self.click(By.CSS_SELECTOR, ".js_next_page")
+            return self.check_user_info1
+        except NoSuchElementException as e:
+            print("except:", e)
+
     def goto_add_member(self):
 
         # 点击 添加成员

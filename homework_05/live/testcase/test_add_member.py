@@ -64,9 +64,9 @@ class TestMember:
         4、只要 手机号 正确，则返回True
         """
         add_mem = self.main_page.goto_add_member().add_member(username, account, phone)
-        check_username = add_mem.check_user_info(username)
+        check_username = add_mem.check_user_info_last(username)
         assert check_username
-        check_user_phone = add_mem.check_user_info(phone)
+        check_user_phone = add_mem.check_user_info_last(phone)
         assert check_user_phone
 
     def teardown(self):
