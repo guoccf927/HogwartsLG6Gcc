@@ -72,34 +72,35 @@ class MenuContactsPage(BasePage):
         # 存在，则更新参数为 True
         if info in info_list:
             exist_flag = True
-        else:
-            # 取出翻页元素的属性
-            try:
-                while 1:
-                    # 点击 下一页
-                    self.click(By.CSS_SELECTOR, ".js_next_page")
+            return exist_flag
 
-                    # 获取当页内容
-                    ele_list = self.finds(By.CSS_SELECTOR, ".member_colRight_memberTable_td")
-                    for ele in ele_list:
-                        info_list.append(ele.get_attribute("title"))
+        # 取出翻页元素的属性
+        try:
+            while 1:
+                # 点击 下一页
+                self.click(By.CSS_SELECTOR, ".js_next_page")
 
-                    # info 存在，则更新参数为 True
-                    if info in info_list:
-                        exist_flag = True
+                # 获取当页内容
+                ele_list = self.finds(By.CSS_SELECTOR, ".member_colRight_memberTable_td")
+                for ele in ele_list:
+                    info_list.append(ele.get_attribute("title"))
 
-                    # 跳出循环方法二
-                    """
-                    1、取出当前页数
-                    2、当前面数字和后面数字相同时，则跳出循环
-                    """
-                    page_str = self.find(By.CSS_SELECTOR, ".ww_pageNav_info_text").text
-                    print(page_str)
-                    page_list = page_str.split("/")
-                    if page_list[0] == page_list[-1]:
-                        break
-            except NoSuchElementException as e:
-                print("except:", e)
+                # info 存在，则更新参数为 True
+                if info in info_list:
+                    exist_flag = True
+
+                # 跳出循环方法二
+                """
+                1、取出当前页数
+                2、当前面数字和后面数字相同时，则跳出循环
+                """
+                page_str = self.find(By.CSS_SELECTOR, ".ww_pageNav_info_text").text
+                print(page_str)
+                page_list = page_str.split("/")
+                if page_list[0] == page_list[-1]:
+                    break
+        except NoSuchElementException as e:
+            print("except:", e)
         return exist_flag
 
     def goto_add_member(self):
