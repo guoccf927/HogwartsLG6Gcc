@@ -4,6 +4,7 @@
 # @File   : test_add_member.py
 import datetime
 import random
+import pytest
 
 from homework_05.live.page.main_page import MainPage
 
@@ -26,6 +27,28 @@ class TestMember:
         """
         self.main_page = MainPage()
 
+    def teardown(self):
+        """
+        最后回到首页
+        """
+        self.main_page.goto_menu_index()
+
+    def test_add_member_last(self):
+        # 获取随机数
+        now_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        number = random.randint(11111111, 99999999)
+
+        # 用户信息
+        username = f"name_{now_time}"
+        account = f"account_{now_time}"
+        phone = f"132{number}"
+        add_mem = self.main_page.goto_add_member().add_member(username, account, phone)
+
+        check_info_list = [username, phone]
+        check_info = add_mem.check_user_info_last(check_info_list)
+        assert check_info
+
+    @pytest.mark.skip
     def test_add_member(self):
         """
         1、进入 添加成员 页面
@@ -68,9 +91,3 @@ class TestMember:
         assert check_username
         check_user_phone = add_mem.check_user_info(phone)
         assert check_user_phone
-
-    def teardown(self):
-        """
-        最后回到首页
-        """
-        self.main_page.goto_menu_index()
