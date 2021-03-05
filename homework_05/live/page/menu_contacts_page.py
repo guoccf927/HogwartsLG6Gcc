@@ -106,9 +106,9 @@ class MenuContactsPage(BasePage):
     def check_user_phone(self, phone):
         """
         1、设置默认参数 False
-        2、获取首页信息，判断用户名存在，则更新参数为 True
+        2、获取首页信息，判断手机号存在，则更新参数为 True
         3、首页不存在该用户名，(1) js_next_page 翻页元素不存在时，保持默认参数 False
-                           (2) js_next_page 翻页元素存在，点击翻页按钮并取出当页内容，判断用户名，存在则更新参数为 True 且跳出循环
+                           (2) js_next_page 翻页元素存在，点击翻页按钮并取出当页内容，判断手机号，存在则更新参数为 True 且跳出循环
         可以传入一个参数，在while里做判断 ，判断这个人存在 ，就return True，
         另一个判断条件是，如果翻页完成，就 return False.
         :return: 默认参数 False ，找到这个人即更新参数为 True
@@ -124,7 +124,7 @@ class MenuContactsPage(BasePage):
         for ele in ele_list:
             info_list.append(ele.get_attribute("title"))
 
-        # 用户名存在，则更新参数为 True
+        # 手机号存在，则更新参数为 True
         if phone in info_list:
             exist_flag = True
         else:
@@ -139,7 +139,7 @@ class MenuContactsPage(BasePage):
                     for ele in ele_list:
                         info_list.append(ele.get_attribute("title"))
 
-                    # 用户名存在，则更新参数为 True
+                    # 手机号存在，则更新参数为 True
                     if phone in info_list:
                         exist_flag = True
 
