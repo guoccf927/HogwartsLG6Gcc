@@ -103,25 +103,34 @@ class MenuContactsPage(BasePage):
             print("except:", e)
         return exist_flag
 
-    def check_user_info_last(self, info):
-        """
-        第六阶段12节 数据驱动 所感
-        :return: 默认参数 False ，找到 info 即更新参数为 True
-        """
-        # 设置默认参数
-        exist_flag = False
-
-        # 获取用户信息
-        info_list = []
+    def get_user_info_page(self, info_list):
 
         # 取首页内容
         ele_list = self.finds(By.CSS_SELECTOR, ".member_colRight_memberTable_td")
         for ele in ele_list:
             info_list.append(ele.get_attribute("title"))
+        return info_list
+
+    def check_user_info_last(self, info):
+        """
+        第六阶段12节 数据驱动 所感
+        :return: 默认参数 False ，找到 info 即更新参数为 True
+        """
+        # 打印参数
+        print(f"校验信息为：{info}")
+
+        # 设置默认参数
+        exist_flag = False
+        info_list = []
+
+        # 获取当前页用户信息
+        info_list = self.get_user_info_page(info_list)
 
         # 存在，则更新参数为 True
         if info in info_list:
             exist_flag = True
+            print(info_list)
+            print("111111111")
             return exist_flag
 
         try:
@@ -133,11 +142,15 @@ class MenuContactsPage(BasePage):
             print(f"当前页数：{page_str}")
             page_list = page_str.split("/")
             if page_list[0] == page_list[-1]:
+                print(info_list)
+                print("222222222222")
                 return exist_flag
 
             # 点击 下一页
             self.click(By.CSS_SELECTOR, ".js_next_page")
-            return self.check_user_info1
+            print(info_list)
+            print("3333333333")
+            return self.get_user_info_page()
         except NoSuchElementException as e:
             print("except:", e)
 

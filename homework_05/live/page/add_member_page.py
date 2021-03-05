@@ -10,9 +10,9 @@ from homework_05.live.page.menu_contacts_page import MenuContactsPage
 class AddMemberPage(BasePage):
     def add_member(self, username, account, phone):
         # 打印用户信息
-        print(username)
-        print(account)
-        print(phone)
+        print(f"添加用户名为：{username}")
+        print(f"添加用户名账号为：{account}")
+        print(f"添加用户手机号为：{phone}")
 
         # 输入 姓名
         self.sen_keys(By.ID, "username", username)
