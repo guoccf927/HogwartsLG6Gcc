@@ -104,11 +104,6 @@ class MenuContactsPage(BasePage):
             print("except:", e)
         return exist_flag
 
-    def goto_add_member(self):
-
-        # 点击 添加成员
-        self.click(By.CSS_SELECTOR, ".js_add_member")
-
     def check_user_info_last(self, check_info_list, info_list=[]):
         """
         第六阶段12节 数据驱动 所感
@@ -126,7 +121,6 @@ class MenuContactsPage(BasePage):
         # 存在，则更新参数为 True
         if check_info_list[0] in info_list and check_info_list[1] in info_list:
             exist_flag = True
-            print(exist_flag)
             return exist_flag
 
         try:
