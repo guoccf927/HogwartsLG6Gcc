@@ -49,7 +49,7 @@ class TestMember:
         2、进入 通讯录 获取全部列表信息
         3、用户名 存在
         4、手机号 正确
-        缺点：如果添加的联系人在第一页，会翻到最后一页，获取完所有的姓名再返回；如果有几十页，效率就会很低
+        缺点：如果添加的联系人在第一页，会翻到最后一页，获取完所有的用户信息再返回；如果有几十页，效率就会很低
         """
         # info_list = self.main_page.goto_add_member().add_member(username, account, phone).get_user_info()
         # assert username in info_list
@@ -64,9 +64,9 @@ class TestMember:
         4、只要 手机号 正确，则返回True
         """
         add_mem = self.main_page.goto_add_member().add_member(username, account, phone)
-        check_username = add_mem.check_username(username)
+        check_username = add_mem.check_user_info(username)
         assert check_username
-        check_user_phone = add_mem.check_user_phone(username)
+        check_user_phone = add_mem.check_user_info(phone)
         assert check_user_phone
 
     def teardown(self):
