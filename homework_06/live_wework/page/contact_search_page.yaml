@@ -1,0 +1,7 @@
+- by: resource-id
+  locator: 'com.tencent.wework:id/gy9'
+  action: send
+  value: "{value}"
+
+- by: xpath
+  locator: '//*[@text="匆匆的企业"]/../*[@class="android.view.ViewGroup"]'

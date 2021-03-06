@@ -1,0 +1,17 @@
+- by: xpath
+  locator: '//*[@text="手动输入添加"]'
+  action: click
+
+- by: xpath
+  locator: '//*[@resource-id="com.tencent.wework:id/b7m"]'
+  action: send
+  value: "{name_value}"
+
+- by: xpath
+  locator: '//*[@resource-id="com.tencent.wework:id/fwi"]'
+  action: send
+  value: "{phone_value}"
+
+- by: xpath
+  locator: '//*[@text="保存"]'
+  action: click
