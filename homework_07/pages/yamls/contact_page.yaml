@@ -1,0 +1,4 @@
+goto_contact_search_page:
+  - by: id
+    locator: com.tencent.wework:id/igk
+    action: find_click

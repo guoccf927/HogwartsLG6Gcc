@@ -1,0 +1,19 @@
+search_user:
+  - by: id
+    locator: com.tencent.wework:id/gy9
+    action: find_clear
+
+  - by: xpath
+    locator: //*[@text="搜索"]
+    action: find_sendkeys
+    value: ${key}
+
+verify_user_noexists:
+  - by: xpath
+    locator: //*[@text="无搜索结果"]
+    text: "无搜索结果"
+    action: wait_until
+
+goto_user_page:
+  - text: ${username}
+    action: slide_click
