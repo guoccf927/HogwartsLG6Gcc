@@ -2,3 +2,9 @@ goto_contact_search_page:
   - by: id
     locator: com.tencent.wework:id/igk
     action: find_click
+
+goto_add_user_page:
+  - by: xpath
+    locator: //*[@text="添加成员"]
+    text: 添加成员
+    action: slide_click

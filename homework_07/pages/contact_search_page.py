@@ -24,6 +24,7 @@ class ContactSearchPage(BasePage):
         self.parse_action("../pages/yamls/contact_search_page.yaml", "verify_user_noexists")
 
     def goto_user_page(self, username):
+        # 点击 对应用户名称
         self._params["username"] = username
         self.parse_action("../pages/yamls/contact_search_page.yaml", "goto_user_page")
         return UserPage(self.driver)

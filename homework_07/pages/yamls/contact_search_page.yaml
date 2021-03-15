@@ -15,5 +15,8 @@ verify_user_noexists:
     action: wait_until
 
 goto_user_page:
-  - text: ${username}
+  #  根据企业名称定位用户名称，
+  - by: xpath
+    locator: //*[contains(@text, "企业")]/../android.view.ViewGroup
+    text: ${username}
     action: slide_click

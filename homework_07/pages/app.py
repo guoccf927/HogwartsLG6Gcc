@@ -22,6 +22,21 @@ class App(BasePage):
             self.driver = driver
 
     def start(self):
+        """
+        执行用例之前，需要：
+        1、打开 appium server，并启动
+        2、打开 mumu模拟器
+        3、电脑 连接 模拟器：adb connect 127.0.0.1:7555
+        参数解释：
+        "platformName": "android", // 指定平台
+        "deviceName": "127.0.0.1:7555", // mumu设备名称，通过 adb devices 命令获取
+        "appPackage": "com.xueqiu.android", // 目标App，通过 adb logcat|grep -i displayed 命令获取
+        "appActivity": ".view.WelcomeActivityAlias", // 目标页面， 通过 adb logcat|grep -i displayed 命令获取
+        "noReset": "true", // 保存默认设置
+        "skipServerInstallation": "true", // 规避安装
+        "unicodeKeyBoard": "true", // 中文输入必备
+        "resetKeyBoard": "true" // 中文输入必备
+        """
         caps = {}
         caps["platformName"] = "Android"
         caps["deviceName"] = "wework"
