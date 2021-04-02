@@ -4,7 +4,9 @@
 # @File   : member_management.py
 
 import requests
-from homework_09.wework.member_conf import *
+
+from homework_09.work1.wework.member_conf import TestConf
+
 
 class MemberManagement:
     def __init__(self):
