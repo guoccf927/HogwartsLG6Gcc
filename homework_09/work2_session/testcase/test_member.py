@@ -4,13 +4,14 @@
 # @File   : test_member.py
 import datetime
 import random
-
+import allure
 import pytest
 
 from homework_09.work2_session.testcase.conf import member_info_list
 from homework_09.work2_session.wework.member_management import MemberManagement
 
 
+@allure.feature("Test Member API")
 class TestMember:
     def setup(self):
         self.member = MemberManagement()
@@ -25,9 +26,11 @@ class TestMember:
         self.mobile = f"+86 133{number}"
         self.department = [1]
 
+    @allure.story("Test token")
     def test_token(self):
         self.member.get_token()
 
+    @allure.story("Test create_member")
     @pytest.mark.parametrize("userid, mobile", [
         (member_info_list[0]["userid"], member_info_list[0]["mobile"]),
         (member_info_list[1]["userid"], member_info_list[1]["mobile"]),
@@ -56,6 +59,7 @@ class TestMember:
         # 校验方式可用如下方式，避免网络原因
         # assert res.get("errmsg", "network error") == "created"
 
+    @allure.story("Test get_member_info")
     def test_get_member_info(self):
         # 添加用户
         self.member.create_member(self.userid, self.name, self.mobile, self.department)
@@ -66,6 +70,7 @@ class TestMember:
         # 校验userid
         assert res["userid"] == self.userid
 
+    @allure.story("Test update_member")
     def test_update_member(self):
         # 添加用户
         self.member.create_member(self.userid, self.name, self.mobile, self.department)
